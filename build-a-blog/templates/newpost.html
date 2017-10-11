@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form action = '/blog', method='POST'>
+    Title for your new blog:
+    <br>
+    <input type = 'text', name = 'new_title'>
+    <br>
+    <div style = 'color:red'>{{title_error}}</div>
+    <br>
+    Your new blog:
+    <br>
+    <textarea name='new_blog'></textarea>
+    <br>
+    <div style = 'color:red'>{{body_error}}</div>
+    <input type = 'submit', value = 'Submit'>
+</form>
+
+{% endblock %}

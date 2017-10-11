@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{title}}</title>
+
+        <div style = 'display: inline-block'>
+            <a href = '/blog'>Main Blog Page</a> 
+        </div>
+
+        <div style = 'display: inline-block'>
+            <a href = '/newpost'>Add a Blog Entry</a>
+        </div>       
+        
+        <h1 style = 'text-align: center'>{{title}}</h1>
+
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
