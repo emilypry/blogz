@@ -31,24 +31,30 @@ def index():
             if body=='':
                 body_error='Please fill in the body'
             return render_template("newpost.html", title = "Build a Blog", 
-                    title_error = title_error, body_error=body_error)
-
+                    title_error = title_error, body_error=body_error)   
         else:
             blog = Blog(title, body)
             db.session.add(blog)
             db.session.commit()
 
+            return render_template("single_post.html", blog = blog)
+
     blogs = Blog.query.all()
+    
+    num = request.args.get('id')
+    if num!=None:
+        for blog in blogs:
+            if blog.id==int(num):
+                return render_template("single_post.html", blog=blog)
+   
+
     return render_template("blog.html", title = "Build a Blog", blogs=blogs)
+
+
 
 @app.route('/newpost')
 def newpost_page():
     return render_template("newpost.html", title = "Add a Blog Entry")
-
-
-
-
-
 
 
 
