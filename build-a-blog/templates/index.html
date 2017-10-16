@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+{{blog_title}}
+{{blog_body}}
+
+
+{% for user in users %}
+    <a href = '/login'>
+        <h2>{{user.username}}</h2>
+    </a>
+
+{% endfor %}
+
+
+{% endblock %}
