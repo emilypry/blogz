@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for blog in blogs %}
+    <a href = '/blog?id={{blog.id}}'>
+        <h1 style = 'text-align: left'>{{blog.title}}</h1>
+    </a>
+    <h2 style = 'text-align: left'>{{blog.body}}</h2>
+{% endfor %}
+
+{% endblock %}

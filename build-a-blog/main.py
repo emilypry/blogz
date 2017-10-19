@@ -39,15 +39,20 @@ def require_login():
 
 @app.route('/')
 def index():
-    users = User.query.all()
-    print(users)
-    return render_template('index.html', users=users)
+    num = request.args.get('id')
+    if num:
+        user = User.query.get(num)
+        blogs = user.blogs
+        return render_template('user.html', blogs=blogs)
+    else:
+        users = User.query.all()
+        return render_template('index.html', users=users)
+
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
     if request.method=='POST':
         owner = User.query.filter_by(username=session['username']).first()
-
         title = request.form['new_title']
         body = request.form['new_blog']
 
@@ -66,18 +71,16 @@ def blog():
             db.session.commit()
 
             return render_template("single_post.html", blog = blog)
-
+    
+    users = User.query.all()
     blogs = Blog.query.all()
-    
-    
-    num = request.args.get('id')
-    if num!=None:
-        for blog in blogs:
-            if blog.id==int(num):
-                return render_template("single_post.html", blog=blog)
-   
 
-    return render_template("blog.html", title = "Build a Blog", blogs=blogs)
+    num = request.args.get('id')
+    if num:
+        blog = Blog.query.get(num)
+        return render_template('single_post.html', blog=blog, users=users)
+        
+    return render_template("blog.html", title = "Blogz", blogs=blogs, users=users)
 
 @app.route('/newpost')
 def newpost_page():

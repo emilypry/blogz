@@ -6,7 +6,7 @@
 
 
 {% for user in users %}
-    <a href = '/login'>
+    <a href = '/?id={{user.id}}'>
         <h2>{{user.username}}</h2>
     </a>
 
